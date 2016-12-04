@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,8 +19,10 @@ namespace Animation_Parse
     {
         private int dayCount = 0;
         private int pageCount = 0;
-        private ImageList imgList;
-        private string[] srcList;
+        private ImageList imgList = new ImageList();
+        private string[] srcList = new string[1000];
+        private string[] titleList = new string[1000];
+
         //HTMLParser HTMLParser;
         public Form1()
         {
@@ -39,7 +42,7 @@ namespace Animation_Parse
             string data = "";
             var request = (HttpWebRequest)WebRequest.Create(url);
             var response = (HttpWebResponse)request.GetResponse();
-            if(response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 Stream receiveStream = response.GetResponseStream();
                 StreamReader readStream = null;
@@ -78,12 +81,29 @@ namespace Animation_Parse
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            int cnt = 0;
             if (pageCount == 0)
             {
                 Console.WriteLine("Run");
                 HtmlDocument docs = webBrowser1.Document;
                 HtmlElementCollection tables = default(HtmlElementCollection);
                 tables = docs.GetElementsByTagName("div");
+                HtmlElementCollection spans = default(HtmlElementCollection);
+                spans = docs.GetElementsByTagName("span");
+                foreach (HtmlElement he in spans)
+                {
+                    if (he.GetAttribute("className").ToString() == "text")
+                    {
+                        if (he.InnerText != null)
+                        {
+                            string title = he.InnerText;
+                            titleList[cnt] = title;
+                            Console.WriteLine(title);
+                            cnt++;
+                        }
+                    }
+                }
+                cnt = 0;
                 foreach (HtmlElement he in tables)
                 {
                     if (he.GetAttribute("className").ToString() == "enter-list-entity")
@@ -92,21 +112,41 @@ namespace Animation_Parse
                         {
                             //Console.WriteLine(he.InnerHtml.ToString());
                             string imgSrc = Regex.Match(he.InnerHtml.ToString(), "src=[\"'](.+?)[\"'].+?", RegexOptions.IgnoreCase).Groups[1].Value;
-                            string titleStr = Regex.Match(he.InnerHtml.ToString(), "title=[\"'](.+?)[\"'].+?", RegexOptions.IgnoreCase).Groups[1].Value;
+                            string titleStr = Regex.Match(he.InnerHtml.ToString(), "title=[\"'](.+?)[\"'].*?", RegexOptions.IgnoreCase).Groups[1].Value;
+                            string titleStr2 = Regex.Match(he.InnerHtml, "<a[\\s\\S]*?title=\"([^<>] *?)\">", RegexOptions.IgnoreCase).Groups[1].Value;
                             string hrefStr = Regex.Match(he.InnerHtml.ToString(), "href=[\"'](.+?)[\"'].+?", RegexOptions.IgnoreCase).Groups[1].Value;
-                            Console.WriteLine(titleStr);
+                            img_Title.Images.Add(LoadImage(imgSrc));
+
+                            srcList[cnt] = hrefStr;
+                            LoadImage(imgSrc).Save(Application.StartupPath + "\\" + cnt.ToString() + ".jpg", ImageFormat.Jpeg);
+                            cnt++;
+                            //Console.WriteLine(titleStr);
+
+                            //Console.WriteLine(titleStr2);
                             Console.WriteLine(imgSrc);
                             Console.WriteLine(hrefStr);
                         }
                         //Thread.Sleep(100);
                     }
-                    else if(he.GetAttribute("className").ToString() == "enter-list-head")
+                    else if (he.GetAttribute("className").ToString() == "enter-list-head")
                     {
                         dayCount++;
                     }
                 }
                 pageCount = 1;
+                cnt = 0;
+                foreach (string item in titleList)
+                {
+                    if (item != null && item != "")
+                        if (img_Title.Images.Count < cnt)
+                            break;
+                        else
+                            listView1.Items.Add(item, cnt);
+                    cnt++;
+                }
+                this.Refresh();
             }
+
         }
     }
 }

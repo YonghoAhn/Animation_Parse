@@ -45,16 +45,18 @@
             // 
             // img_Title
             // 
-            this.img_Title.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.img_Title.ImageSize = new System.Drawing.Size(16, 16);
+            this.img_Title.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.img_Title.ImageSize = new System.Drawing.Size(250, 187);
             this.img_Title.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // listView1
             // 
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.LargeImageList = this.img_Title;
             this.listView1.Location = new System.Drawing.Point(0, 24);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(897, 531);
+            this.listView1.SmallImageList = this.img_Title;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -89,6 +91,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(877, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.ScrollBarsEnabled = false;
             this.webBrowser1.Size = new System.Drawing.Size(20, 20);
             this.webBrowser1.TabIndex = 2;
