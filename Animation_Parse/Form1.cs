@@ -121,7 +121,6 @@ namespace Animation_Parse
                             LoadImage(imgSrc).Save(Application.StartupPath + "\\" + cnt.ToString() + ".jpg", ImageFormat.Jpeg);
                             cnt++;
                             //Console.WriteLine(titleStr);
-
                             //Console.WriteLine(titleStr2);
                             Console.WriteLine(imgSrc);
                             Console.WriteLine(hrefStr);
@@ -147,6 +146,20 @@ namespace Animation_Parse
                 this.Refresh();
             }
 
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem item = listView1.SelectedItems[0];
+                int idx = item.Index;
+                VideoForm v = new VideoForm();
+                VideoForm.navigateLink = srcList[idx];
+                v.Show();
+
+                //string sel_item = item.SubItems[1].Text;
+            }
         }
     }
 }

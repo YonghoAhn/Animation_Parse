@@ -59,6 +59,7 @@
             this.listView1.SmallImageList = this.img_Title;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // menuStrip1
             // 
