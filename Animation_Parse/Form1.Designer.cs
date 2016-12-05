@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.img_Title = new System.Windows.Forms.ImageList(this.components);
             this.listView1 = new System.Windows.Forms.ListView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.파일FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.새로고침RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.최근본애니ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.보기VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.최근본영상RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.완결애니CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.방영애니BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,25 +85,13 @@
             // 새로고침RToolStripMenuItem
             // 
             this.새로고침RToolStripMenuItem.Name = "새로고침RToolStripMenuItem";
-            this.새로고침RToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.새로고침RToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.새로고침RToolStripMenuItem.Text = "새로 고침(&R)";
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(877, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(20, 20);
-            this.webBrowser1.TabIndex = 2;
-            this.webBrowser1.Visible = false;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // 최근본애니ToolStripMenuItem
             // 
             this.최근본애니ToolStripMenuItem.Name = "최근본애니ToolStripMenuItem";
-            this.최근본애니ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.최근본애니ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.최근본애니ToolStripMenuItem.Text = "최근 본 애니";
             // 
             // 보기VToolStripMenuItem
@@ -133,6 +122,18 @@
             this.방영애니BToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.방영애니BToolStripMenuItem.Text = "방영 애니(&B)";
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(877, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.ScrollBarsEnabled = false;
+            this.webBrowser1.Size = new System.Drawing.Size(20, 20);
+            this.webBrowser1.TabIndex = 2;
+            this.webBrowser1.Visible = false;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -141,6 +142,7 @@
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";

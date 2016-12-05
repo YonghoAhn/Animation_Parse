@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -101,6 +102,20 @@ namespace Animation_Parse
                 }
                 axWindowsMediaPlayer1.URL = videosrc;
                 //axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
+        }
+
+        private void 다운로드DToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "*.mp4|*.mp4";
+            saveFileDialog1.Title = "Download";
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName != null)
+            {
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile(videosrc, saveFileDialog1.FileName);
+                }
             }
         }
     }
