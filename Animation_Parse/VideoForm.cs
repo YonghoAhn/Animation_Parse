@@ -107,16 +107,25 @@ namespace Animation_Parse
 
         private void 다운로드DToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var client = new WebClient();
+            client.DownloadProgressChanged += (s, ev) =>
+            {
+                toolStripProgressBar1.Value = ev.ProgressPercentage;
+            };
             saveFileDialog1.Filter = "*.mp4|*.mp4";
             saveFileDialog1.Title = "Download";
             saveFileDialog1.ShowDialog();
             if (saveFileDialog1.FileName != null)
             {
-                using (var client = new WebClient())
-                {
-                    client.DownloadFile(videosrc, saveFileDialog1.FileName);
-                }
+                Uri myUri = new Uri(videosrc, UriKind.Absolute);
+                client.DownloadFileAsync(myUri, saveFileDialog1.FileName);
+                
             }
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
