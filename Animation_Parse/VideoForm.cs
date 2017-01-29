@@ -75,12 +75,7 @@ namespace Animation_Parse
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0)
-            {
-                ListViewItem item = listView1.SelectedItems[0];
-                int idx = item.Index;
-                GetVideoURL(hrefsrc[idx]);
-            }
+           
 
         }
 
@@ -161,6 +156,16 @@ namespace Animation_Parse
         private void 오프닝건너뛰기ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition += 1000f;
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem item = listView1.SelectedItems[0];
+                int idx = item.Index;
+                GetVideoURL(hrefsrc[idx]);
+            }
         }
     }
 }

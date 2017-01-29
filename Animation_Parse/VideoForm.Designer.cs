@@ -33,6 +33,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripProgressBar2 = new System.Windows.Forms.ToolStripProgressBar();
             this.listView1 = new System.Windows.Forms.ListView();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
@@ -40,10 +42,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.영상VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.다운로드DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripProgressBar2 = new System.Windows.Forms.ToolStripProgressBar();
             this.오프닝건너뛰기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,10 +77,10 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripProgressBar1,
             this.toolStripLabel2,
-            this.toolStripProgressBar2});
+            this.toolStripProgressBar2,
+            this.toolStripLabel1,
+            this.toolStripProgressBar1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 385);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(350, 25);
@@ -99,6 +99,17 @@
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 22);
             // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(43, 22);
+            this.toolStripLabel2.Text = "버퍼링";
+            // 
+            // toolStripProgressBar2
+            // 
+            this.toolStripProgressBar2.Name = "toolStripProgressBar2";
+            this.toolStripProgressBar2.Size = new System.Drawing.Size(100, 22);
+            // 
             // listView1
             // 
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -109,6 +120,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // axWindowsMediaPlayer1
             // 
@@ -164,20 +176,9 @@
             // 다운로드DToolStripMenuItem
             // 
             this.다운로드DToolStripMenuItem.Name = "다운로드DToolStripMenuItem";
-            this.다운로드DToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.다운로드DToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.다운로드DToolStripMenuItem.Text = "다운로드(&D)";
             this.다운로드DToolStripMenuItem.Click += new System.EventHandler(this.다운로드DToolStripMenuItem_Click);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(43, 22);
-            this.toolStripLabel2.Text = "버퍼링";
-            // 
-            // toolStripProgressBar2
-            // 
-            this.toolStripProgressBar2.Name = "toolStripProgressBar2";
-            this.toolStripProgressBar2.Size = new System.Drawing.Size(100, 22);
             // 
             // 오프닝건너뛰기ToolStripMenuItem
             // 

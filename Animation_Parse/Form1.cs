@@ -17,7 +17,7 @@ namespace Animation_Parse
 {
     public partial class Form1 : Form
     {
-        private int dayCount = 0;
+        //private int dayCount = 0;
         private int pageCount = 0;
         private ImageList imgList = new ImageList();
         private string[] srcList = new string[1000];
@@ -65,11 +65,11 @@ namespace Animation_Parse
 
         private Image LoadImage(string url)
         {
-            System.Net.WebRequest request =
-                System.Net.WebRequest.Create(url);
+            WebRequest request =
+                WebRequest.Create(url);
 
-            System.Net.WebResponse response = request.GetResponse();
-            System.IO.Stream responseStream =
+            WebResponse response = request.GetResponse();
+            Stream responseStream =
                 response.GetResponseStream();
 
             Bitmap bmp = new Bitmap(responseStream);
@@ -112,8 +112,8 @@ namespace Animation_Parse
                         {
                             //Console.WriteLine(he.InnerHtml.ToString());
                             string imgSrc = Regex.Match(he.InnerHtml.ToString(), "src=[\"'](.+?)[\"'].+?", RegexOptions.IgnoreCase).Groups[1].Value;
-                            string titleStr = Regex.Match(he.InnerHtml.ToString(), "title=[\"'](.+?)[\"'].*?", RegexOptions.IgnoreCase).Groups[1].Value;
-                            string titleStr2 = Regex.Match(he.InnerHtml, "<a[\\s\\S]*?title=\"([^<>] *?)\">", RegexOptions.IgnoreCase).Groups[1].Value;
+                            //string titleStr = Regex.Match(he.InnerHtml.ToString(), "title=[\"'](.+?)[\"'].*?", RegexOptions.IgnoreCase).Groups[1].Value;
+                            //string titleStr2 = Regex.Match(he.InnerHtml, "<a[\\s\\S]*?title=\"([^<>] *?)\">", RegexOptions.IgnoreCase).Groups[1].Value;
                             string hrefStr = Regex.Match(he.InnerHtml.ToString(), "href=[\"'](.+?)[\"'].+?", RegexOptions.IgnoreCase).Groups[1].Value;
                             img_Title.Images.Add(LoadImage(imgSrc));
 
@@ -122,15 +122,15 @@ namespace Animation_Parse
                             cnt++;
                             //Console.WriteLine(titleStr);
                             //Console.WriteLine(titleStr2);
-                            Console.WriteLine(imgSrc);
-                            Console.WriteLine(hrefStr);
+                            //Console.WriteLine(imgSrc);
+                            //Console.WriteLine(hrefStr);
                         }
                         //Thread.Sleep(100);
                     }
-                    else if (he.GetAttribute("className").ToString() == "enter-list-head")
-                    {
-                        dayCount++;
-                    }
+                   // else if (he.GetAttribute("className").ToString() == "enter-list-head")
+                  //  {
+                     //   dayCount++;
+                   // }
                 }
                 pageCount = 1;
                 cnt = 0;
@@ -143,7 +143,7 @@ namespace Animation_Parse
                             listView1.Items.Add(item, cnt);
                     cnt++;
                 }
-                this.Refresh();
+                Refresh();
             }
 
         }
