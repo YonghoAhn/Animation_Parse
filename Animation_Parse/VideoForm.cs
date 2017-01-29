@@ -87,6 +87,8 @@ namespace Animation_Parse
         private void GetVideoURL(string NavigateURL)
         {
             pageCnt = 0;
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar2.Value = 0;
             videoBrowser.Navigate(NavigateURL);
         }
         private string videosrc;
@@ -94,13 +96,41 @@ namespace Animation_Parse
         {
             if(pageCnt == 0)
             {
+                Regex regex = new Regex(@"http://.*\.mp4");
                 HtmlDocument docs = videoBrowser.Document;
-                HtmlElementCollection videos = docs.GetElementsByTagName("video");
+                HtmlElementCollection videos = docs.GetElementsByTagName("meta");
                 foreach(HtmlElement he in videos)
                 {
-                    videosrc = he.GetAttribute("src");
+                   // Console.WriteLine(he.OuterHtml.ToString());
+                    Console.WriteLine(regex.Match(he.OuterHtml.ToString()));
+                    if(regex.Match(he.OuterHtml.ToString()).Captures.Count > 0)
+                    {
+                        videosrc = regex.Match(he.OuterHtml.ToString()).Value;
+                    }
+                    //Console.WriteLine(he.InnerText.ToString());
                 }
-                axWindowsMediaPlayer1.URL = videosrc;
+                
+                if (videosrc != null)
+                {
+                    var client = new WebClient();
+                    client.DownloadProgressChanged += (s, ev) =>
+                    {
+                        toolStripProgressBar2.Value = ev.ProgressPercentage;
+                        if (ev.ProgressPercentage == 100)
+                            axWindowsMediaPlayer1.URL = Application.StartupPath + @"\a.mp4";
+                    };
+                    Uri myUri = new Uri(videosrc, UriKind.Absolute);
+                    client.DownloadFileAsync(myUri, Application.StartupPath + @"\a.mp4");
+
+                    client.Dispose();
+
+                    toolStripProgressBar1.Value = 0;
+
+                }
+                
+                
+                //client.
+                //axWindowsMediaPlayer1.URL = videosrc;
                 //axWindowsMediaPlayer1.Ctlcontrols.play();
             }
         }
@@ -126,6 +156,11 @@ namespace Animation_Parse
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void 오프닝건너뛰기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition += 1000f;
         }
     }
 }
